@@ -1,11 +1,12 @@
 package tsatow
 
+import ListUtils._
+
 object P11 {
   def encodeModified[A](list: List[A]): List[Any] = {
-    // TODO 男らしくmapも使わないバージョンにする
-    P10.encode(list) map {
+    map(P10.encode(list))({
       case (1, e) => e
       case t      => t
-    }
+    })
   }
 }

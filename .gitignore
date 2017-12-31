@@ -1,0 +1,11 @@
+*.class
+*.log
+.idea
+**/target/*
+*.iml
+.ensime
+.ensime_cache
+ensime.sbt
+tags
+run.sh
+tmp

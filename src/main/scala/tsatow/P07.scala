@@ -1,14 +1,21 @@
 package tsatow
 
+import tsatow.ListUtils._
+
 object P07 {
+  @annotation.tailrec
   def flatten(list: List[Any]): List[Any] = {
-    // TODO 末尾再帰にできぬ できぬのだ!!
-    def go(acc: List[Any], maybeList: Any): List[Any] = maybeList match {
-      case e :: rest => go(go(acc, e), rest)
-      case Nil       => acc
-      case e         => e :: acc
+    @annotation.tailrec
+    def go(acc: List[Any], maybeList: List[Any]): List[Any] = maybeList match {
+      case (l: List[Any]) :: rest => go(addAll(acc, l), rest)
+      case e :: rest              => go(add(acc, e), rest)
+      case Nil                    => acc
     }
 
-    P05.reverse(go(Nil, list))
+    if (forall(list, (e => !e.isInstanceOf[List[Any]]): Any => Boolean)) {
+      list
+    } else {
+      flatten(go(Nil, list))
+    }
   }
 }

@@ -63,4 +63,14 @@ object ListUtils {
 
     go(0, l)
   }
+
+  def forall[A](list: List[A], f: A => Boolean): Boolean = {
+    @annotation.tailrec
+    def go(acc: Boolean, list: List[A], f: A => Boolean): Boolean = list match {
+      case Nil       => acc
+      case e :: rest => go(acc && f(e), rest, f)
+    }
+
+    go(true, list, f)
+  }
 }
